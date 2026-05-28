@@ -169,6 +169,42 @@
     .table td::before { content: attr(data-label) ': '; font-family: var(--mono); font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; margin-right: 8px; }
     .brand-mark { font-size: 28px; }
   }
+
+  /* Agent / Research tab */
+  .agent-wrap { display: flex; flex-direction: column; gap: 14px; }
+  .agent-disclaimer { background: var(--bg-elev); border: 1px solid var(--border); border-left: 3px solid var(--warn); border-radius: var(--r); padding: 12px 16px; font-family: var(--serif); font-size: 13px; font-style: italic; color: var(--text-mute); line-height: 1.55; }
+  .agent-disclaimer strong { color: var(--text); font-style: normal; font-family: var(--sans); font-weight: 600; }
+  .agent-chat { background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--r); min-height: 420px; max-height: 60vh; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+  .agent-chat::-webkit-scrollbar { width: 8px; }
+  .agent-chat::-webkit-scrollbar-track { background: transparent; }
+  .agent-chat::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 4px; }
+  .agent-empty { color: var(--text-dim); font-family: var(--serif); font-style: italic; font-size: 15px; text-align: center; padding: 40px 20px; line-height: 1.7; }
+  .agent-empty .hint { display: block; font-size: 12px; font-family: var(--mono); font-style: normal; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.12em; margin-top: 16px; }
+  .agent-empty .ex { display: block; margin: 6px 0; font-family: var(--serif); font-size: 14px; color: var(--text-mute); cursor: pointer; transition: color 0.15s; }
+  .agent-empty .ex:hover { color: var(--accent); }
+  .msg { display: flex; gap: 12px; align-items: flex-start; }
+  .msg-avatar { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; font-family: var(--mono); font-size: 11px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+  .msg-user .msg-avatar { background: var(--bg-elev2); color: var(--text); border: 1px solid var(--border-strong); }
+  .msg-agent .msg-avatar { background: var(--accent); color: #1a1611; }
+  .msg-body { flex: 1; font-size: 14px; line-height: 1.6; padding-top: 4px; }
+  .msg-body p { margin-bottom: 10px; }
+  .msg-body p:last-child { margin-bottom: 0; }
+  .msg-body ul, .msg-body ol { margin: 8px 0 10px 20px; }
+  .msg-body li { margin-bottom: 4px; }
+  .msg-body code { font-family: var(--mono); font-size: 12px; background: var(--bg-elev2); padding: 1px 5px; border-radius: 3px; }
+  .msg-body strong { color: var(--text); font-weight: 600; }
+  .msg-tools { font-family: var(--mono); font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); }
+  .msg-thinking { color: var(--text-mute); font-style: italic; font-family: var(--serif); }
+  .thinking-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-left: 2px; animation: bounce 1.2s infinite; }
+  .thinking-dot:nth-child(2) { animation-delay: 0.15s; }
+  .thinking-dot:nth-child(3) { animation-delay: 0.3s; }
+  @keyframes bounce { 0%, 80%, 100% { opacity: 0.3; transform: translateY(0); } 40% { opacity: 1; transform: translateY(-3px); } }
+  .agent-input-row { display: flex; gap: 8px; }
+  .agent-input { flex: 1; resize: none; min-height: 44px; font-family: var(--sans); font-size: 14px; line-height: 1.4; padding: 12px; }
+  .agent-input:focus { border-color: var(--accent); }
+  .agent-controls { display: flex; justify-content: space-between; align-items: center; font-family: var(--mono); font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.12em; }
+  .agent-clear { background: transparent; border: 0; color: var(--text-dim); font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; cursor: pointer; }
+  .agent-clear:hover { color: var(--neg); }
 </style>
 </head>
 <body>
@@ -198,6 +234,7 @@
   <button class="nav-btn active" data-tab="portfolio">Portfolio</button>
   <button class="nav-btn" data-tab="watchlist">Watchlist</button>
   <button class="nav-btn" data-tab="allocation">Allocation</button>
+  <button class="nav-btn" data-tab="agent">Research</button>
   <div class="nav-spacer"></div>
   <div class="nav-right">
     <button class="btn btn-icon" id="settings-btn" title="Settings">⚙</button>
@@ -303,6 +340,33 @@
   </div>
 </section>
 
+<!-- AGENT / RESEARCH -->
+<section class="tab" id="tab-agent">
+  <div class="agent-wrap">
+    <div class="agent-disclaimer">
+      <strong>Research assistant — not financial advice.</strong> This tool reads market data and writes summaries to help you think. It does not predict prices and cannot tell you what to buy or sell. Decisions are yours.
+    </div>
+    <div class="agent-chat" id="agent-chat">
+      <div class="agent-empty" id="agent-empty">
+        Ask a question about your holdings, your watchlist, or any ticker.
+        <span class="hint">Try asking</span>
+        <span class="ex" data-prompt="What's the case for and against NVDA at current prices?">"What's the case for and against NVDA at current prices?"</span>
+        <span class="ex" data-prompt="Scan my watchlist and tell me which ones look interesting right now.">"Scan my watchlist and tell me which ones look interesting right now."</span>
+        <span class="ex" data-prompt="What recent news might be moving AAPL?">"What recent news might be moving AAPL?"</span>
+        <span class="ex" data-prompt="Walk me through how to read a P/E ratio in context.">"Walk me through how to read a P/E ratio in context."</span>
+      </div>
+    </div>
+    <div class="agent-input-row">
+      <textarea class="agent-input" id="agent-input" placeholder="Ask anything about markets, tickers, or your portfolio…" rows="2"></textarea>
+      <button class="btn btn-primary" id="agent-send" style="align-self: stretch;">Send</button>
+    </div>
+    <div class="agent-controls">
+      <span id="agent-status">Ready</span>
+      <button class="agent-clear" id="agent-clear">Clear conversation</button>
+    </div>
+  </div>
+</section>
+
 <footer class="footer">
   Built for <em>two operators</em> · Prices via Finnhub · Data stored locally
 </footer>
@@ -325,6 +389,7 @@
   };
 
   const LS_KEY = 'ledger_finnhub_key';   // Finnhub key stays device-local (it IS secret)
+  const AGENT_URL = 'https://tradeview-agent.jacksdeutsch.workers.dev/';
   let state = { portfolio: [], watchlist: [], userName: '' };
   let apiKey = '';
   let allocChart = null;
@@ -670,6 +735,137 @@
       });
     }
   }
+
+  // ---- Agent ----
+  // Conversation history is kept in memory per session (intentionally not synced or persisted —
+  // each chat is its own thread, and chat history can get sensitive/messy across devices).
+  const agentHistory = [];
+  let agentBusy = false;
+
+  function agentSetStatus(s) {
+    document.getElementById('agent-status').textContent = s;
+  }
+
+  function agentRenderHistory() {
+    const chat = document.getElementById('agent-chat');
+    const empty = document.getElementById('agent-empty');
+    if (agentHistory.length === 0 && !agentBusy) {
+      empty.style.display = '';
+      chat.querySelectorAll('.msg, .msg-thinking-row').forEach(el => el.remove());
+      return;
+    }
+    empty.style.display = 'none';
+    chat.querySelectorAll('.msg, .msg-thinking-row').forEach(el => el.remove());
+    agentHistory.forEach(m => {
+      const div = document.createElement('div');
+      div.className = 'msg ' + (m.role === 'user' ? 'msg-user' : 'msg-agent');
+      const initial = m.role === 'user' ? (state.userName ? state.userName[0].toUpperCase() : 'U') : 'AI';
+      const toolNote = m.tools && m.tools.length ? `<div class="msg-tools">Used: ${m.tools.join(' · ')}</div>` : '';
+      div.innerHTML = `<div class="msg-avatar">${esc(initial)}</div><div class="msg-body">${formatMarkdown(m.text)}${toolNote}</div>`;
+      chat.appendChild(div);
+    });
+    if (agentBusy) {
+      const t = document.createElement('div');
+      t.className = 'msg msg-agent msg-thinking-row';
+      t.innerHTML = `<div class="msg-avatar">AI</div><div class="msg-body msg-thinking">Thinking<span class="thinking-dot"></span><span class="thinking-dot"></span><span class="thinking-dot"></span></div>`;
+      chat.appendChild(t);
+    }
+    chat.scrollTop = chat.scrollHeight;
+  }
+
+  // Minimal markdown: paragraphs, bold, bullet lists, inline code. Keeps responses readable
+  // without pulling in a full markdown library.
+  function formatMarkdown(text) {
+    if (!text) return '';
+    let t = esc(text);
+    t = t.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    t = t.replace(/`([^`]+)`/g, '<code>$1</code>');
+    const lines = t.split('\n');
+    const out = [];
+    let inList = false;
+    for (const line of lines) {
+      const m = line.match(/^\s*[-*]\s+(.*)$/);
+      if (m) {
+        if (!inList) { out.push('<ul>'); inList = true; }
+        out.push('<li>' + m[1] + '</li>');
+      } else {
+        if (inList) { out.push('</ul>'); inList = false; }
+        if (line.trim()) out.push('<p>' + line + '</p>');
+      }
+    }
+    if (inList) out.push('</ul>');
+    return out.join('');
+  }
+
+  async function agentSend(userText) {
+    if (!userText.trim() || agentBusy) return;
+    agentBusy = true;
+    agentSetStatus('Asking…');
+
+    // Inject lightweight portfolio + watchlist context so the agent knows what we hold.
+    let contextPrefix = '';
+    if (state.portfolio.length || state.watchlist.length) {
+      const ctx = {
+        portfolio: state.portfolio.map(p => ({ ticker: p.ticker, shares: p.shares, avg_cost: p.cost })),
+        watchlist: state.watchlist.map(w => ({ ticker: w.ticker, rating: w.rating, note: w.note }))
+      };
+      contextPrefix = '[User context — their current holdings and watchlist:\n' + JSON.stringify(ctx) + '\n]\n\n';
+    }
+
+    agentHistory.push({ role: 'user', text: userText });
+    agentRenderHistory();
+
+    // Build the messages array the Worker expects (Anthropic chat format).
+    const messages = agentHistory.map((m, i) => ({
+      role: m.role,
+      content: (i === agentHistory.length - 1 && m.role === 'user') ? (contextPrefix + m.text) : m.text
+    }));
+
+    try {
+      const r = await fetch(AGENT_URL, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ messages })
+      });
+      const data = await r.json();
+      if (!r.ok || data.error) {
+        throw new Error(data.error || `HTTP ${r.status}`);
+      }
+      agentHistory.push({ role: 'assistant', text: data.reply || '(empty response)', tools: data.tools_used || [] });
+      agentSetStatus('Ready');
+    } catch(e) {
+      agentHistory.push({ role: 'assistant', text: '⚠ Error: ' + e.message + '\n\nIf this persists, check your Cloudflare Worker logs.' });
+      agentSetStatus('Error');
+    } finally {
+      agentBusy = false;
+      agentRenderHistory();
+    }
+  }
+
+  document.getElementById('agent-send').addEventListener('click', () => {
+    const input = document.getElementById('agent-input');
+    const text = input.value.trim();
+    if (!text) return;
+    input.value = '';
+    agentSend(text);
+  });
+  document.getElementById('agent-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      document.getElementById('agent-send').click();
+    }
+  });
+  document.getElementById('agent-clear').addEventListener('click', () => {
+    if (agentHistory.length === 0) return;
+    if (!confirm('Clear this conversation?')) return;
+    agentHistory.length = 0;
+    agentRenderHistory();
+    agentSetStatus('Ready');
+  });
+  // Wire up the example prompts on the empty-state hints
+  document.querySelectorAll('#agent-empty .ex').forEach(el => {
+    el.addEventListener('click', () => agentSend(el.dataset.prompt));
+  });
 
   function render() { renderPortfolio(); renderWatchlist(); }
 
