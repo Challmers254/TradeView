@@ -7,8 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js" onerror="window.__firebaseFailed=true"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js" onerror="window.__firebaseFailed=true"></script>
 <style>
   :root {
     --bg: #0d0e0f;
@@ -32,7 +32,7 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 14px; line-height: 1.5; min-height: 100vh; }
   body { padding: 40px 32px; max-width: 1240px; margin: 0 auto; }
-
+ 
   /* Header */
   .masthead { border-bottom: 1px solid var(--border); padding-bottom: 24px; margin-bottom: 32px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; }
   .brand { display: flex; align-items: baseline; gap: 14px; }
@@ -45,7 +45,7 @@
   .meta-val { color: var(--text); font-size: 12px; }
   .meta-val.live::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--pos); margin-right: 6px; vertical-align: middle; animation: pulse 2s infinite; }
   @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-
+ 
   /* Nav */
   .nav { display: flex; gap: 2px; margin-bottom: 28px; border-bottom: 1px solid var(--border); }
   .nav-btn { background: transparent; border: 0; color: var(--text-mute); font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; padding: 14px 20px; cursor: pointer; position: relative; transition: color 0.15s; }
@@ -54,7 +54,7 @@
   .nav-btn.active::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 1px; background: var(--accent); }
   .nav-spacer { flex: 1; }
   .nav-right { display: flex; gap: 8px; align-items: center; padding: 10px 0; }
-
+ 
   /* Buttons */
   .btn { background: transparent; border: 1px solid var(--border-strong); color: var(--text); padding: 8px 14px; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; border-radius: var(--r); transition: all 0.15s; }
   .btn:hover { border-color: var(--accent); color: var(--accent); }
@@ -63,7 +63,7 @@
   .btn-icon { padding: 6px 10px; font-size: 14px; }
   .btn-ghost { border-color: transparent; padding: 6px 8px; color: var(--text-dim); }
   .btn-ghost:hover { color: var(--neg); border-color: transparent; }
-
+ 
   /* Stats row */
   .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-bottom: 32px; border: 1px solid var(--border); border-radius: var(--r); background: var(--bg-elev); overflow: hidden; }
   .stat { padding: 20px 24px; border-right: 1px solid var(--border); position: relative; }
@@ -71,10 +71,10 @@
   .stat-label { font-family: var(--mono); font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 8px; }
   .stat-value { font-family: var(--serif); font-size: 30px; font-weight: 500; letter-spacing: -0.01em; line-height: 1.1; }
   .stat-sub { font-family: var(--mono); font-size: 11px; color: var(--text-mute); margin-top: 4px; }
-
+ 
   .pos { color: var(--pos); }
   .neg { color: var(--neg); }
-
+ 
   /* Settings */
   .settings-panel { background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--r); padding: 16px 20px; margin-bottom: 20px; display: none; }
   .settings-panel.open { display: block; }
@@ -84,19 +84,19 @@
   .key-ok { color: var(--pos); }
   .key-miss { color: var(--warn); }
   .settings-hint { margin-top: 10px; font-size: 12px; color: var(--text-dim); font-style: italic; font-family: var(--serif); }
-
+ 
   /* Forms */
   input, select, textarea { background: var(--bg-elev2); border: 1px solid var(--border); color: var(--text); padding: 9px 12px; font-family: var(--sans); font-size: 13px; border-radius: var(--r); outline: none; transition: border-color 0.15s; }
   input:focus, select:focus, textarea:focus { border-color: var(--accent); }
   input::placeholder, textarea::placeholder { color: var(--text-dim); }
   .mono-input { font-family: var(--mono); }
-
+ 
   .add-form { background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--r); padding: 20px; margin-bottom: 24px; }
   .add-form-label { font-family: var(--mono); font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 12px; }
   .pf-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr auto; gap: 10px; }
   .wl-grid { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; margin-bottom: 10px; }
   .wl-grid textarea { grid-column: 1 / -1; resize: vertical; min-height: 60px; font-family: var(--sans); }
-
+ 
   /* Tables */
   .table { width: 100%; border-collapse: collapse; }
   .table thead th { font-family: var(--mono); font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.15em; text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--border); font-weight: 500; }
@@ -108,9 +108,11 @@
   .ticker-cell { font-family: var(--mono); font-weight: 600; letter-spacing: 0.02em; font-size: 14px; }
   .added-by { font-family: var(--mono); font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; }
   .price-input { width: 80px; padding: 5px 8px; font-size: 12px; text-align: right; font-family: var(--mono); }
-
+  .sector-select { padding: 5px 8px; font-size: 11px; font-family: var(--mono); width: 100%; min-width: 140px; }
+  .sector-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+ 
   .empty { text-align: center; color: var(--text-dim); font-style: italic; font-family: var(--serif); font-size: 16px; padding: 60px 20px; }
-
+ 
   /* Watchlist cards */
   .wl-card { background: var(--bg-elev); border: 1px solid var(--border); border-left: 3px solid var(--border-strong); border-radius: var(--r); padding: 16px 20px; margin-bottom: 10px; transition: border-color 0.15s; }
   .wl-card:hover { border-left-color: var(--accent); }
@@ -127,30 +129,32 @@
   .b-pass { background: rgba(90, 93, 98, 0.2); color: var(--text-mute); }
   .wl-note { font-family: var(--serif); font-size: 15px; line-height: 1.6; color: var(--text); margin: 8px 0; font-style: italic; }
   .wl-meta { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 8px; }
-
+ 
   /* Allocation */
   .alloc-title { font-family: var(--mono); font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 14px; }
   .alloc-bar { display: flex; height: 12px; border-radius: 2px; overflow: hidden; background: var(--bg-elev); margin-bottom: 16px; }
   .alloc-seg { height: 100%; transition: opacity 0.15s; }
   .alloc-seg:hover { opacity: 0.75; }
-  .alloc-legend { display: flex; flex-wrap: wrap; gap: 16px 24px; }
+  .alloc-legend { display: flex; flex-wrap: wrap; gap: 16px 24px; margin-bottom: 32px; }
   .alloc-item { display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 12px; }
   .alloc-dot { width: 10px; height: 10px; border-radius: 1px; }
   .alloc-tick { color: var(--text); font-weight: 600; }
   .alloc-pct { color: var(--text-mute); }
-  .chart-wrap { margin-top: 32px; height: 280px; position: relative; }
-
+  .chart-wrap { margin-top: 16px; height: 280px; position: relative; max-width: 360px; margin-left: auto; margin-right: auto; }
+  .bench-status { font-family: var(--mono); font-size: 11px; color: var(--text-mute); margin-left: 12px; }
+  .bench-explain { font-family: var(--serif); font-style: italic; font-size: 13px; color: var(--text-mute); margin-top: 6px; }
+ 
   /* Tab containers */
   .tab { display: none; }
   .tab.active { display: block; }
-
+ 
   /* Footer */
   .footer { margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--border); font-family: var(--mono); font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.15em; text-align: center; }
   .footer em { color: var(--accent); font-style: normal; }
-
+ 
   .refresh-msg { font-family: var(--mono); font-size: 11px; color: var(--text-mute); margin-left: 12px; }
-  .toolbar-row { display: flex; align-items: center; margin-bottom: 16px; }
-
+  .toolbar-row { display: flex; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 8px; }
+ 
   /* Responsive */
   @media (max-width: 760px) {
     body { padding: 24px 16px; }
@@ -169,7 +173,7 @@
     .table td::before { content: attr(data-label) ': '; font-family: var(--mono); font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; margin-right: 8px; }
     .brand-mark { font-size: 28px; }
   }
-
+ 
   /* Agent / Research tab */
   .agent-wrap { display: flex; flex-direction: column; gap: 14px; }
   .agent-disclaimer { background: var(--bg-elev); border: 1px solid var(--border); border-left: 3px solid var(--warn); border-radius: var(--r); padding: 12px 16px; font-family: var(--serif); font-size: 13px; font-style: italic; color: var(--text-mute); line-height: 1.55; }
@@ -208,7 +212,7 @@
 </style>
 </head>
 <body>
-
+ 
 <header class="masthead">
   <div class="brand">
     <div class="brand-mark">Trade <em>View</em></div>
@@ -229,7 +233,7 @@
     </div>
   </div>
 </header>
-
+ 
 <nav class="nav">
   <button class="nav-btn active" data-tab="portfolio">Portfolio</button>
   <button class="nav-btn" data-tab="watchlist">Watchlist</button>
@@ -240,7 +244,7 @@
     <button class="btn btn-icon" id="settings-btn" title="Settings">⚙</button>
   </div>
 </nav>
-
+ 
 <div class="settings-panel" id="settings-panel">
   <div class="settings-row">
     <label>Finnhub key</label>
@@ -250,7 +254,7 @@
   </div>
   <div class="settings-hint">Your key is stored only in this browser. Each user enters their own — never share keys.</div>
 </div>
-
+ 
 <!-- PORTFOLIO -->
 <section class="tab active" id="tab-portfolio">
   <div class="stats">
@@ -275,12 +279,12 @@
       <div class="stat-sub">Lifetime</div>
     </div>
   </div>
-
+ 
   <div class="toolbar-row">
     <button class="btn btn-primary" id="refresh-prices">↻ Refresh prices</button>
     <span class="refresh-msg" id="refresh-msg"></span>
   </div>
-
+ 
   <div class="add-form">
     <div class="add-form-label">Add Position</div>
     <div class="pf-grid">
@@ -291,11 +295,12 @@
       <button class="btn btn-primary" id="pf-add">Add</button>
     </div>
   </div>
-
+ 
   <table class="table">
     <thead>
       <tr>
         <th>Ticker</th>
+        <th>Sector</th>
         <th>Added By</th>
         <th class="num">Shares</th>
         <th class="num">Cost</th>
@@ -308,7 +313,7 @@
     <tbody id="pf-rows"></tbody>
   </table>
 </section>
-
+ 
 <!-- WATCHLIST -->
 <section class="tab" id="tab-watchlist">
   <div class="add-form">
@@ -326,20 +331,45 @@
   </div>
   <div id="wl-rows"></div>
 </section>
-
-<!-- ALLOCATION -->
+ 
+<!-- ALLOCATION (sector-grouped) -->
 <section class="tab" id="tab-allocation">
-  <div id="alloc-empty" class="empty" style="display: none;">Add portfolio positions to see allocation breakdown.</div>
+  <div id="alloc-empty" class="empty" style="display: none;">Add portfolio positions to see sector allocation.</div>
   <div id="alloc-content">
-    <div class="alloc-title">Distribution by Position</div>
-    <div class="alloc-bar" id="alloc-bar"></div>
-    <div class="alloc-legend" id="alloc-legend"></div>
-    <div class="chart-wrap">
-      <canvas id="alloc-chart"></canvas>
+    <div class="toolbar-row">
+      <button class="btn btn-primary" id="refresh-bench">↻ Refresh sectors &amp; benchmarks</button>
+      <span class="bench-status" id="bench-status"></span>
     </div>
+    <div class="bench-explain">Benchmark = SPDR sector ETF (XLK, XLF, XLV, etc.). 1-year change shown when your Finnhub plan supports historical candles; otherwise today's change is used.</div>
+ 
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 32px; align-items: start;">
+      <div>
+        <div class="alloc-title">Distribution by Sector</div>
+        <div class="alloc-bar" id="alloc-bar"></div>
+        <div class="alloc-legend" id="alloc-legend"></div>
+      </div>
+      <div class="chart-wrap">
+        <canvas id="alloc-chart"></canvas>
+      </div>
+    </div>
+ 
+    <div class="alloc-title" style="margin-top: 24px;">Sector Performance vs Benchmark</div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Sector</th>
+          <th class="num">% Portfolio</th>
+          <th class="num">Value</th>
+          <th class="num">Your Return</th>
+          <th class="num">Benchmark</th>
+          <th class="num">Delta</th>
+        </tr>
+      </thead>
+      <tbody id="sector-rows"></tbody>
+    </table>
   </div>
 </section>
-
+ 
 <!-- AGENT / RESEARCH -->
 <section class="tab" id="tab-agent">
   <div class="agent-wrap">
@@ -352,7 +382,7 @@
         <span class="hint">Try asking</span>
         <span class="ex" data-prompt="What's the case for and against NVDA at current prices?">"What's the case for and against NVDA at current prices?"</span>
         <span class="ex" data-prompt="Scan my watchlist and tell me which ones look interesting right now.">"Scan my watchlist and tell me which ones look interesting right now."</span>
-        <span class="ex" data-prompt="What recent news might be moving AAPL?">"What recent news might be moving AAPL?"</span>
+        <span class="ex" data-prompt="Am I too concentrated in any one sector?">"Am I too concentrated in any one sector?"</span>
         <span class="ex" data-prompt="Walk me through how to read a P/E ratio in context.">"Walk me through how to read a P/E ratio in context."</span>
       </div>
     </div>
@@ -366,16 +396,60 @@
     </div>
   </div>
 </section>
-
+ 
 <footer class="footer">
   Built for <em>two operators</em> · Prices via Finnhub · Data stored locally
 </footer>
-
+ 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script>
 (function() {
-  const COLORS = ['#c8a86b', '#7aa7d9', '#4ec27e', '#e55c5c', '#d9a04a', '#b08fc7', '#8ab4a0', '#c97f5d'];
-
+  // ---- Sector classification (Finnhub industry -> S&P GICS sector + SPDR ETF) ----
+  const SECTORS = {
+    'Technology':             { etf: 'XLK',  color: '#7aa7d9' },
+    'Financials':             { etf: 'XLF',  color: '#c8a86b' },
+    'Health Care':            { etf: 'XLV',  color: '#4ec27e' },
+    'Consumer Discretionary': { etf: 'XLY',  color: '#b08fc7' },
+    'Consumer Staples':       { etf: 'XLP',  color: '#d4b478' },
+    'Energy':                 { etf: 'XLE',  color: '#d9a04a' },
+    'Industrials':            { etf: 'XLI',  color: '#7d92a3' },
+    'Materials':              { etf: 'XLB',  color: '#a07d5b' },
+    'Utilities':              { etf: 'XLU',  color: '#5ba8a0' },
+    'Real Estate':            { etf: 'XLRE', color: '#c97f8e' },
+    'Communication Services': { etf: 'XLC',  color: '#9d8fc7' },
+    'Unclassified':           { etf: null,   color: '#5a5d62' }
+  };
+ 
+  // Substring rules — order matters; first match wins. More specific keywords come first.
+  const SECTOR_RULES = [
+    { keys: ['real estate', 'reit'], sector: 'Real Estate' },
+    { keys: ['utilities', 'electric util', 'water util', 'gas util', 'power producer', 'multi-utilities'], sector: 'Utilities' },
+    { keys: ['media', 'entertainment', 'telecommunication', 'interactive media', 'wireless'], sector: 'Communication Services' },
+    { keys: ['oil', 'gas', 'energy equipment', 'consumable fuels', 'petroleum'], sector: 'Energy' },
+    { keys: ['pharmaceutical', 'biotechnology', 'health care', 'medical', 'life sciences', 'health-care'], sector: 'Health Care' },
+    { keys: ['bank', 'insurance', 'capital markets', 'consumer finance', 'financial services', 'diversified financial', 'asset management'], sector: 'Financials' },
+    { keys: ['software', 'semiconductor', 'technology hardware', 'it services', 'communications equipment', 'electronic equipment', 'internet software'], sector: 'Technology' },
+    { keys: ['chemical', 'metals', 'mining', 'paper', 'containers', 'construction materials', 'forest products'], sector: 'Materials' },
+    { keys: ['aerospace', 'machinery', 'industrial conglomerates', 'transportation', 'construction & engineering', 'airlines', 'air freight', 'road & rail', 'professional services', 'electrical equipment', 'building products', 'commercial services', 'marine'], sector: 'Industrials' },
+    { keys: ['food', 'beverage', 'tobacco', 'household product', 'personal product', 'staples retailing'], sector: 'Consumer Staples' },
+    { keys: ['retail', 'apparel', 'hotels', 'restaurants', 'leisure', 'automobile', 'auto compon', 'household durable', 'consumer service', 'distributors', 'textiles', 'luxury'], sector: 'Consumer Discretionary' }
+  ];
+ 
+  function classifyIndustry(industry) {
+    if (!industry) return 'Unclassified';
+    const low = String(industry).toLowerCase();
+    for (const r of SECTOR_RULES) {
+      if (r.keys.some(k => low.includes(k))) return r.sector;
+    }
+    return 'Unclassified';
+  }
+ 
+  function sectorOptions(selected) {
+    return Object.keys(SECTORS).map(s =>
+      `<option value="${esc(s)}"${s === selected ? ' selected' : ''}>${esc(s)}</option>`
+    ).join('');
+  }
+ 
   // ---- Firebase config ----
   // These web config values are safe to be public (not secret keys).
   const firebaseConfig = {
@@ -387,20 +461,70 @@
     messagingSenderId: "91966700783",
     appId: "1:91966700783:web:fdd63bf000e64bc8e06f1a"
   };
-
+ 
   const LS_KEY = 'ledger_finnhub_key';   // Finnhub key stays device-local (it IS secret)
+  const LS_STATE = 'ledger_state_fallback';  // Offline mirror of shared state
   const AGENT_URL = 'https://tradeview-agent.jacksdeutsch.workers.dev/';
+ 
   let state = { portfolio: [], watchlist: [], userName: '' };
+  let benchmarks = {};   // { 'XLK': {price, dailyChange, yearChange}, ... }  — not synced, recomputed on demand
   let apiKey = '';
   let allocChart = null;
   let db = null;
   let dbRef = null;
   let suppressWrite = false;   // prevents the snapshot listener from echoing our own writes back
-
+ 
+  // ---- Local-only fallback (used if Firebase is blocked) ----
+  function loadLocalState() {
+    try {
+      const raw = localStorage.getItem(LS_STATE);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        state.portfolio = parsed.portfolio || [];
+        state.watchlist = parsed.watchlist || [];
+      }
+    } catch(e) {}
+  }
+  function saveLocalState() {
+    try {
+      localStorage.setItem(LS_STATE, JSON.stringify({
+        portfolio: state.portfolio || [],
+        watchlist: state.watchlist || []
+      }));
+    } catch(e) {}
+  }
+ 
+  // Wait for Firebase scripts to be available, or time out (ad blockers / firewalls).
+  function waitForFirebase(timeoutMs) {
+    return new Promise((resolve, reject) => {
+      if (window.__firebaseFailed) return reject(new Error('blocked'));
+      if (typeof firebase !== 'undefined') return resolve();
+      const start = Date.now();
+      const iv = setInterval(() => {
+        if (typeof firebase !== 'undefined') { clearInterval(iv); resolve(); }
+        else if (window.__firebaseFailed) { clearInterval(iv); reject(new Error('blocked')); }
+        else if (Date.now() - start > timeoutMs) { clearInterval(iv); reject(new Error('timeout')); }
+      }, 100);
+    });
+  }
+ 
   // ---- Persistence: Firebase Realtime Database ----
   // Shared state (portfolio, watchlist) lives in the cloud and syncs live to every device.
   // The Finnhub API key is intentionally NOT synced — it stays in each browser's localStorage.
-  function initFirebase() {
+  async function initFirebase() {
+    // Load local fallback first so the app works even if Firebase never connects.
+    loadLocalState();
+    render();
+ 
+    try {
+      await waitForFirebase(5000);
+    } catch(e) {
+      setSync(e.message === 'blocked' ? 'Blocked' : 'No Firebase', false);
+      console.warn('Firebase not available — local-only mode. Reason:', e.message);
+      console.warn('If you expected cloud sync, check that gstatic.com is not blocked by an ad blocker, firewall, or privacy extension.');
+      return;
+    }
+ 
     try {
       firebase.initializeApp(firebaseConfig);
       db = firebase.database();
@@ -414,8 +538,7 @@
             watchlist: val.watchlist || [],
             userName: state.userName || val.userName || ''
           };
-        } else {
-          state = { portfolio: [], watchlist: [], userName: state.userName };
+          saveLocalState();  // keep local mirror in sync
         }
         setSync('Live', true);
         // Don't yank the UI out from under someone mid-edit; render on remote changes otherwise.
@@ -433,9 +556,10 @@
       console.error('Firebase init failed', e);
     }
   }
-
+ 
   function save() {
-    if (!dbRef) return;
+    saveLocalState();   // always persist locally, even when Firebase works
+    if (!dbRef) return;  // local-only mode; nothing more to do
     suppressWrite = true;
     dbRef.set({
       portfolio: state.portfolio || [],
@@ -443,19 +567,19 @@
       userName: state.userName || ''
     }).finally(() => { suppressWrite = false; });
   }
-
+ 
   function isEditingPrice() {
     const el = document.activeElement;
-    return el && el.classList && el.classList.contains('price-input');
+    return el && el.classList && (el.classList.contains('price-input') || el.classList.contains('sector-select'));
   }
-
+ 
   function setSync(text, ok) {
     const el = document.getElementById('sync-status');
     if (!el) return;
     el.textContent = (ok ? '● ' : '○ ') + text;
     el.style.color = ok ? 'var(--pos)' : 'var(--warn)';
   }
-
+ 
   function loadLocal() {
     apiKey = localStorage.getItem(LS_KEY) || '';
     const savedName = localStorage.getItem('ledger_username') || '';
@@ -466,7 +590,7 @@
   function saveKey() {
     localStorage.setItem(LS_KEY, apiKey);
   }
-
+ 
   // ---- Format ----
   function fmt(n) {
     if (n === null || n === undefined || isNaN(n)) return '—';
@@ -482,9 +606,10 @@
   function esc(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   }
-
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+ 
   // ---- Finnhub ----
-  async function fetchQuote(ticker) {
+  async function fetchQuoteFull(ticker) {
     if (!apiKey) throw new Error('No API key');
     const url = `https://finnhub.io/api/v1/quote?symbol=${encodeURIComponent(ticker)}&token=${encodeURIComponent(apiKey)}`;
     const r = await fetch(url);
@@ -493,9 +618,39 @@
     if (!r.ok) throw new Error('HTTP ' + r.status);
     const d = await r.json();
     if (!d || !d.c || d.c === 0) throw new Error('No quote');
-    return d.c;
+    return d;
   }
-
+  async function fetchQuote(ticker) {
+    return (await fetchQuoteFull(ticker)).c;
+  }
+ 
+  async function fetchProfile(ticker) {
+    if (!apiKey) throw new Error('No API key');
+    const url = `https://finnhub.io/api/v1/stock/profile2?symbol=${encodeURIComponent(ticker)}&token=${encodeURIComponent(apiKey)}`;
+    const r = await fetch(url);
+    if (r.status === 401) throw new Error('Invalid API key');
+    if (r.status === 429) throw new Error('Rate limited');
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r.json();
+  }
+ 
+  // Historical candle — Finnhub free tier often returns 403 here. We handle gracefully.
+  async function fetchYearChange(ticker, currentPrice) {
+    if (!apiKey) return null;
+    const to = Math.floor(Date.now() / 1000);
+    const from = to - (365 * 24 * 60 * 60);
+    const url = `https://finnhub.io/api/v1/stock/candle?symbol=${encodeURIComponent(ticker)}&resolution=D&from=${from}&to=${to}&token=${encodeURIComponent(apiKey)}`;
+    try {
+      const r = await fetch(url);
+      if (!r.ok) return null;
+      const d = await r.json();
+      if (d && d.s === 'ok' && Array.isArray(d.c) && d.c.length > 0) {
+        return ((currentPrice - d.c[0]) / d.c[0]) * 100;
+      }
+    } catch(e) {}
+    return null;
+  }
+ 
   async function refreshAll() {
     const msg = document.getElementById('refresh-msg');
     if (!apiKey) {
@@ -521,7 +676,7 @@
       } catch(e) {
         failed.push(t + ' (' + e.message + ')');
       }
-      if (i < tickers.length - 1) await new Promise(r => setTimeout(r, 1100));
+      if (i < tickers.length - 1) await sleep(1100);
     }
     save();
     render();
@@ -529,7 +684,59 @@
     msg.textContent = `✓ Updated ${ok}/${tickers.length} · ${stamp}` + (failed.length ? ` · Failed: ${failed.join(', ')}` : '');
     msg.style.color = failed.length ? 'var(--warn)' : 'var(--pos)';
   }
-
+ 
+  // ---- Sectors + benchmarks ----
+  async function refreshSectorsAndBenchmarks() {
+    const msg = document.getElementById('bench-status');
+    if (!apiKey) { msg.textContent = '⚠ Add your Finnhub key in settings first'; msg.style.color = 'var(--warn)'; return; }
+    if (state.portfolio.length === 0) { msg.textContent = 'No positions'; return; }
+    msg.style.color = 'var(--text-mute)';
+ 
+    // Step 1: classify any positions missing a sector
+    const unclassified = state.portfolio.filter(p => !p.sector);
+    for (let i = 0; i < unclassified.length; i++) {
+      const p = unclassified[i];
+      msg.textContent = `Classifying ${p.ticker}... (${i+1}/${unclassified.length})`;
+      try {
+        const prof = await fetchProfile(p.ticker);
+        const sector = classifyIndustry(prof && prof.finnhubIndustry);
+        state.portfolio.forEach(x => { if (x.ticker === p.ticker) x.sector = sector; });
+      } catch(e) {
+        state.portfolio.forEach(x => { if (x.ticker === p.ticker) x.sector = 'Unclassified'; });
+      }
+      await sleep(1100);
+    }
+    if (unclassified.length) save();
+ 
+    // Step 2: fetch benchmark data for each sector ETF in use
+    const sectorsInUse = [...new Set(state.portfolio.map(p => p.sector).filter(s => s && s !== 'Unclassified'))];
+    const etfs = sectorsInUse.map(s => SECTORS[s] && SECTORS[s].etf).filter(Boolean);
+    let benchOk = 0; let yearOk = 0;
+    for (let i = 0; i < etfs.length; i++) {
+      const etf = etfs[i];
+      msg.textContent = `Benchmark ${etf}... (${i+1}/${etfs.length})`;
+      try {
+        const q = await fetchQuoteFull(etf);
+        benchmarks[etf] = { price: q.c, dailyChange: q.dp };
+        benchOk++;
+        await sleep(1100);
+        const yc = await fetchYearChange(etf, q.c);
+        if (yc !== null) { benchmarks[etf].yearChange = yc; yearOk++; }
+      } catch(e) { /* skip */ }
+      if (i < etfs.length - 1) await sleep(1100);
+    }
+ 
+    render();
+    const stamp = new Date().toLocaleTimeString();
+    const yrNote = etfs.length > 0
+      ? (yearOk === etfs.length ? ' · 1Y benchmarks available'
+         : yearOk === 0 ? ' · 1Y unavailable (using today\'s change)'
+         : ` · 1Y for ${yearOk}/${etfs.length}`)
+      : '';
+    msg.textContent = `✓ ${benchOk}/${etfs.length} benchmarks · ${stamp}${yrNote}`;
+    msg.style.color = 'var(--pos)';
+  }
+ 
   // ---- Settings ----
   document.getElementById('settings-btn').addEventListener('click', () => {
     document.getElementById('settings-panel').classList.toggle('open');
@@ -552,7 +759,7 @@
       el.className = 'key-status key-miss';
     }
   }
-
+ 
   // ---- Tabs ----
   document.querySelectorAll('.nav-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -563,15 +770,17 @@
       if (btn.dataset.tab === 'allocation') renderAllocation();
     });
   });
-
+ 
   // ---- Name ---- (kept device-local: it identifies who's adding entries)
   document.getElementById('user-name').addEventListener('change', e => {
     state.userName = e.target.value.trim();
     localStorage.setItem('ledger_username', state.userName);
   });
-
+ 
   // ---- Portfolio ----
   document.getElementById('refresh-prices').addEventListener('click', refreshAll);
+  document.getElementById('refresh-bench').addEventListener('click', refreshSectorsAndBenchmarks);
+ 
   document.getElementById('pf-add').addEventListener('click', async () => {
     const ticker = document.getElementById('pf-ticker').value.trim().toUpperCase();
     const shares = parseFloat(document.getElementById('pf-shares').value);
@@ -582,20 +791,31 @@
       try { price = await fetchQuote(ticker); } catch(e) { price = cost; }
     }
     if (!price) price = cost;
+ 
+    // Best-effort sector classification (non-blocking on failure)
+    let sector = null;
+    if (apiKey) {
+      try {
+        const prof = await fetchProfile(ticker);
+        sector = classifyIndustry(prof && prof.finnhubIndustry);
+      } catch(e) { sector = 'Unclassified'; }
+    }
+ 
     state.portfolio.push({
       id: Date.now() + '-' + Math.random().toString(36).slice(2,7),
       ticker, shares, cost, price,
+      sector: sector || null,
       addedBy: state.userName || 'anon',
       addedAt: Date.now()
     });
     ['pf-ticker', 'pf-shares', 'pf-cost', 'pf-price'].forEach(id => document.getElementById(id).value = '');
     save(); render();
   });
-
+ 
   function renderPortfolio() {
     const rows = document.getElementById('pf-rows');
     if (state.portfolio.length === 0) {
-      rows.innerHTML = '<tr><td colspan="8" class="empty">No positions yet. Add one above to begin.</td></tr>';
+      rows.innerHTML = '<tr><td colspan="9" class="empty">No positions yet. Add one above to begin.</td></tr>';
     } else {
       rows.innerHTML = state.portfolio.map(p => {
         const mv = p.shares * p.price;
@@ -603,8 +823,14 @@
         const pl = mv - cb;
         const plPct = cb > 0 ? (pl / cb) * 100 : 0;
         const cls = pl >= 0 ? 'pos' : 'neg';
+        const sec = p.sector || 'Unclassified';
+        const dot = SECTORS[sec] ? SECTORS[sec].color : '#5a5d62';
         return `<tr>
           <td data-label="Ticker"><span class="ticker-cell">${esc(p.ticker)}</span></td>
+          <td data-label="Sector">
+            <span class="sector-dot" style="background:${dot}"></span>
+            <select class="sector-select" data-sector-id="${p.id}">${sectorOptions(sec)}</select>
+          </td>
           <td data-label="Added by"><span class="added-by">${esc(p.addedBy)}</span></td>
           <td data-label="Shares" class="num">${p.shares}</td>
           <td data-label="Cost" class="num">${fmt(p.cost)}</td>
@@ -618,6 +844,12 @@
         inp.addEventListener('change', e => {
           const pos = state.portfolio.find(x => x.id === e.target.dataset.id);
           if (pos) { pos.price = parseFloat(e.target.value) || pos.price; save(); render(); }
+        });
+      });
+      rows.querySelectorAll('.sector-select').forEach(sel => {
+        sel.addEventListener('change', e => {
+          const pos = state.portfolio.find(x => x.id === e.target.dataset.sectorId);
+          if (pos) { pos.sector = e.target.value; save(); render(); }
         });
       });
       rows.querySelectorAll('[data-del]').forEach(btn => {
@@ -642,7 +874,7 @@
     retEl.textContent = fmtPct(ret);
     retEl.className = 'stat-value ' + (pl >= 0 ? 'pos' : 'neg');
   }
-
+ 
   // ---- Watchlist ----
   document.getElementById('wl-add').addEventListener('click', () => {
     const ticker = document.getElementById('wl-ticker').value.trim().toUpperCase();
@@ -659,7 +891,7 @@
     document.getElementById('wl-note').value = '';
     save(); render();
   });
-
+ 
   function renderWatchlist() {
     const rows = document.getElementById('wl-rows');
     if (state.watchlist.length === 0) {
@@ -693,32 +925,60 @@
       });
     });
   }
-
-  // ---- Allocation ----
+ 
+  // ---- Allocation (sector-grouped) ----
   function renderAllocation() {
     const total = state.portfolio.reduce((s, p) => s + p.shares * p.price, 0);
     document.getElementById('alloc-empty').style.display = total > 0 ? 'none' : '';
     document.getElementById('alloc-content').style.display = total > 0 ? '' : 'none';
     if (total === 0) return;
-    const data = state.portfolio.map((p, i) => ({
-      ticker: p.ticker,
-      value: p.shares * p.price,
-      pct: ((p.shares * p.price) / total) * 100,
-      color: COLORS[i % COLORS.length]
-    })).sort((a,b) => b.value - a.value);
+ 
+    // Aggregate by sector
+    const bySector = {};
+    state.portfolio.forEach(p => {
+      const sec = p.sector || 'Unclassified';
+      if (!bySector[sec]) bySector[sec] = { value: 0, cost: 0, positions: 0 };
+      bySector[sec].value += p.shares * p.price;
+      bySector[sec].cost += p.shares * p.cost;
+      bySector[sec].positions += 1;
+    });
+ 
+    const data = Object.keys(bySector).map(sec => {
+      const meta = SECTORS[sec] || SECTORS['Unclassified'];
+      const v = bySector[sec];
+      const yourReturn = v.cost > 0 ? ((v.value - v.cost) / v.cost) * 100 : 0;
+      const bench = meta.etf && benchmarks[meta.etf] ? benchmarks[meta.etf] : null;
+      const benchValue = bench ? (bench.yearChange != null ? bench.yearChange : bench.dailyChange) : null;
+      const benchLabel = bench ? (bench.yearChange != null ? '1Y' : 'today') : '—';
+      return {
+        sector: sec,
+        etf: meta.etf,
+        color: meta.color,
+        value: v.value,
+        cost: v.cost,
+        positions: v.positions,
+        pct: (v.value / total) * 100,
+        yourReturn,
+        benchValue,
+        benchLabel
+      };
+    }).sort((a, b) => b.value - a.value);
+ 
     document.getElementById('alloc-bar').innerHTML = data.map(d =>
-      `<div class="alloc-seg" style="width: ${d.pct}%; background: ${d.color};" title="${d.ticker} ${d.pct.toFixed(1)}%"></div>`
+      `<div class="alloc-seg" style="width: ${d.pct}%; background: ${d.color};" title="${d.sector} ${d.pct.toFixed(1)}%"></div>`
     ).join('');
+ 
     document.getElementById('alloc-legend').innerHTML = data.map(d =>
-      `<div class="alloc-item"><div class="alloc-dot" style="background:${d.color}"></div><span class="alloc-tick">${esc(d.ticker)}</span><span class="alloc-pct">${d.pct.toFixed(1)}%</span></div>`
+      `<div class="alloc-item"><div class="alloc-dot" style="background:${d.color}"></div><span class="alloc-tick">${esc(d.sector)}</span><span class="alloc-pct">${d.pct.toFixed(1)}%</span></div>`
     ).join('');
+ 
     if (allocChart) allocChart.destroy();
     const ctx = document.getElementById('alloc-chart');
     if (ctx && window.Chart) {
       allocChart = new Chart(ctx, {
         type: 'doughnut',
         data: {
-          labels: data.map(d => d.ticker),
+          labels: data.map(d => d.sector),
           datasets: [{ data: data.map(d => d.value), backgroundColor: data.map(d => d.color), borderWidth: 1, borderColor: '#0d0e0f' }]
         },
         options: {
@@ -734,18 +994,39 @@
         }
       });
     }
+ 
+    const sectorRows = document.getElementById('sector-rows');
+    sectorRows.innerHTML = data.map(d => {
+      const yrCls = d.yourReturn >= 0 ? 'pos' : 'neg';
+      const benchCls = d.benchValue == null ? '' : (d.benchValue >= 0 ? 'pos' : 'neg');
+      const delta = d.benchValue == null ? null : (d.yourReturn - d.benchValue);
+      const dCls = delta == null ? '' : (delta >= 0 ? 'pos' : 'neg');
+      const etfLabel = d.etf ? ` <span style="color: var(--text-dim); font-size: 10px;">${d.etf}</span>` : '';
+      return `<tr>
+        <td data-label="Sector">
+          <span class="sector-dot" style="background:${d.color}"></span>
+          <span style="font-weight: 500;">${esc(d.sector)}</span>${etfLabel}
+          <div style="font-size: 10px; color: var(--text-dim); margin-top: 2px;">${d.positions} position${d.positions === 1 ? '' : 's'}</div>
+        </td>
+        <td data-label="% Portfolio" class="num">${d.pct.toFixed(1)}%</td>
+        <td data-label="Value" class="num">${fmt(d.value)}</td>
+        <td data-label="Your Return" class="num ${yrCls}">${fmtPct(d.yourReturn)}</td>
+        <td data-label="Benchmark" class="num ${benchCls}">${d.benchValue == null ? '—' : fmtPct(d.benchValue)}<br><span style="font-size: 10px; color: var(--text-dim);">${d.benchLabel}</span></td>
+        <td data-label="Delta" class="num ${dCls}">${delta == null ? '—' : fmtPct(delta)}</td>
+      </tr>`;
+    }).join('');
   }
-
+ 
   // ---- Agent ----
   // Conversation history is kept in memory per session (intentionally not synced or persisted —
   // each chat is its own thread, and chat history can get sensitive/messy across devices).
   const agentHistory = [];
   let agentBusy = false;
-
+ 
   function agentSetStatus(s) {
     document.getElementById('agent-status').textContent = s;
   }
-
+ 
   function agentRenderHistory() {
     const chat = document.getElementById('agent-chat');
     const empty = document.getElementById('agent-empty');
@@ -772,20 +1053,18 @@
     }
     chat.scrollTop = chat.scrollHeight;
   }
-
+ 
   // Minimal markdown: paragraphs, bold, italic, inline code, links, bullet lists, ordered lists, tables.
   // Designed to be safe (escapes HTML first, then re-injects controlled tags).
   function formatMarkdown(text) {
     if (!text) return '';
     let t = esc(text);
-
-    // Tables: GFM-style with header row + separator | --- | --- |
+ 
     const lines = t.split('\n');
     const out = [];
     let i = 0;
     while (i < lines.length) {
       const line = lines[i];
-      // Detect a table: header row | a | b |, next line is | --- | --- |
       if (/^\s*\|.*\|\s*$/.test(line) && i + 1 < lines.length && /^\s*\|[\s\-:|]+\|\s*$/.test(lines[i + 1])) {
         const header = line.trim().replace(/^\||\|$/g, '').split('|').map(s => s.trim());
         i += 2;
@@ -805,17 +1084,12 @@
       i++;
     }
     t = out.join('\n');
-
-    // Inline formatting (order matters: code first to protect contents)
+ 
     t = t.replace(/`([^`]+)`/g, '<code>$1</code>');
-    // Links: [text](url)
     t = t.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline;">$1</a>');
-    // Bold **text**  (non-greedy, no line breaks)
     t = t.replace(/\*\*([^\*\n]+?)\*\*/g, '<strong>$1</strong>');
-    // Italic *text*  (avoid matching inside bold leftovers)
     t = t.replace(/(^|[^\*])\*([^\*\n]+?)\*(?!\*)/g, '$1<em>$2</em>');
-
-    // Block-level: headings, lists, paragraphs
+ 
     const blockLines = t.split('\n');
     const result = [];
     let inUl = false, inOl = false;
@@ -852,31 +1126,36 @@
     if (inOl) result.push('</ol>');
     return result.join('');
   }
-
+ 
   async function agentSend(userText) {
     if (!userText.trim() || agentBusy) return;
     agentBusy = true;
     agentSetStatus('Asking…');
-
-    // Inject lightweight portfolio + watchlist context so the agent knows what we hold.
+ 
+    // Inject lightweight portfolio + watchlist context (with sectors) so the agent knows what we hold.
     let contextPrefix = '';
     if (state.portfolio.length || state.watchlist.length) {
       const ctx = {
-        portfolio: state.portfolio.map(p => ({ ticker: p.ticker, shares: p.shares, avg_cost: p.cost })),
+        portfolio: state.portfolio.map(p => ({
+          ticker: p.ticker,
+          shares: p.shares,
+          avg_cost: p.cost,
+          current_price: p.price,
+          sector: p.sector || 'Unclassified'
+        })),
         watchlist: state.watchlist.map(w => ({ ticker: w.ticker, rating: w.rating, note: w.note }))
       };
       contextPrefix = '[User context — their current holdings and watchlist:\n' + JSON.stringify(ctx) + '\n]\n\n';
     }
-
+ 
     agentHistory.push({ role: 'user', text: userText });
     agentRenderHistory();
-
-    // Build the messages array the Worker expects (Anthropic chat format).
+ 
     const messages = agentHistory.map((m, i) => ({
       role: m.role,
       content: (i === agentHistory.length - 1 && m.role === 'user') ? (contextPrefix + m.text) : m.text
     }));
-
+ 
     try {
       const r = await fetch(AGENT_URL, {
         method: 'POST',
@@ -897,7 +1176,7 @@
       agentRenderHistory();
     }
   }
-
+ 
   document.getElementById('agent-send').addEventListener('click', () => {
     const input = document.getElementById('agent-input');
     const text = input.value.trim();
@@ -918,13 +1197,18 @@
     agentRenderHistory();
     agentSetStatus('Ready');
   });
-  // Wire up the example prompts on the empty-state hints
   document.querySelectorAll('#agent-empty .ex').forEach(el => {
     el.addEventListener('click', () => agentSend(el.dataset.prompt));
   });
-
-  function render() { renderPortfolio(); renderWatchlist(); }
-
+ 
+  function render() {
+    renderPortfolio();
+    renderWatchlist();
+    if (document.getElementById('tab-allocation').classList.contains('active')) {
+      renderAllocation();
+    }
+  }
+ 
   // ---- Session clock ----
   function tickClock() {
     const now = new Date();
@@ -932,7 +1216,7 @@
   }
   setInterval(tickClock, 1000);
   tickClock();
-
+ 
   loadLocal();
   render();
   initFirebase();
