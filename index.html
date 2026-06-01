@@ -93,7 +93,7 @@
 
   .add-form { background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--r); padding: 20px; margin-bottom: 24px; }
   .add-form-label { font-family: var(--mono); font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 12px; }
-  .pf-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr auto; gap: 10px; }
+  .pf-grid { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 10px; }
   .wl-grid { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; margin-bottom: 10px; }
   .wl-grid textarea { grid-column: 1 / -1; resize: vertical; min-height: 60px; font-family: var(--sans); }
 
@@ -285,13 +285,10 @@
     <span class="refresh-msg" id="refresh-msg"></span>
   </div>
 
-  <div class="add-form">
-    <div class="add-form-label">Add Position</div>
-    <div class="pf-grid">
+  <div class="pf-grid">
       <input type="text" id="pf-ticker" placeholder="TICKER" maxlength="6" class="mono-input" style="text-transform: uppercase;" />
       <input type="number" id="pf-shares" placeholder="Shares" step="0.001" min="0" />
       <input type="number" id="pf-cost" placeholder="Avg cost" step="0.01" min="0" />
-      <input type="number" id="pf-price" placeholder="Price (auto if blank)" step="0.01" min="0" />
       <button class="btn btn-primary" id="pf-add">Add</button>
     </div>
   </div>
@@ -784,7 +781,7 @@
     const ticker = document.getElementById('pf-ticker').value.trim().toUpperCase();
     const shares = parseFloat(document.getElementById('pf-shares').value);
     const cost = parseFloat(document.getElementById('pf-cost').value);
-    let price = parseFloat(document.getElementById('pf-price').value);
+   let price = NaN;
     if (!ticker || !shares || !cost) return;
     if (!price && apiKey) {
       try { price = await fetchQuote(ticker); } catch(e) { price = cost; }
@@ -807,7 +804,7 @@
       addedBy: state.userName || 'anon',
       addedAt: Date.now()
     });
-    ['pf-ticker', 'pf-shares', 'pf-cost', 'pf-price'].forEach(id => document.getElementById(id).value = '');
+   ['pf-ticker', 'pf-shares', 'pf-cost'].forEach(id => document.getElementById(id).value = '');
     save(); render();
   });
 
